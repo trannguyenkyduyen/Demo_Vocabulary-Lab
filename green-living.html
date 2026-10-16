@@ -165,7 +165,7 @@ html[data-lab-theme="dark"] .course-line{background:#30313b!important;border:1px
 html[data-lab-theme="dark"] .course-line b{color:#ffb3c3!important;opacity:1!important}
 html[data-lab-theme="dark"] .course-line span{color:#f1e9ee!important;opacity:1!important}
 html[data-lab-theme="dark"] .panel h2,html[data-lab-theme="dark"] .panel h3{color:#fff1f5!important}
-.prep-red{color:#d71939!important;font-weight:400!important;}html[data-lab-theme="dark"] .prep-red{color:#ff667d!important}
+700!important;}html[data-lab-theme="dark"] .prep-red{color:#ff667d!important}
 </style><style>
 .student-report{margin:18px 0;background:#fff;border:1px solid #edd5da;border-radius:17px;padding:19px}.student-report h2{font-size:19px;margin:0 0 8px;color:#8d1b31}.student-report p{font-size:13px;color:#745a61;line-height:1.55}.report-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.report-fields label{font-size:13px;font-weight:700;color:#703443;display:flex;flex-direction:column;gap:6px}.report-fields input{border:1px solid #e1b6bf;border-radius:10px;padding:11px;min-width:0}.report-preview{background:#fff6f7;padding:12px;border-radius:12px;font-size:13px;line-height:1.8}.report-message{font-size:13px;margin:10px 0 0}.report-message.error{color:#a21932}.report-message.pending{color:#8d5b16}@media(max-width:560px){.report-fields{grid-template-columns:1fr}}
 .word-grid .tile[data-word-id]{cursor:pointer}.word-grid .tile[data-word-id]:focus-visible{outline:3px solid #bd2a43;outline-offset:3px}.home-link{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;margin-bottom:15px;background:#fff;color:#9b1931;border:1px solid #efcbd2;border-radius:11px;font-weight:750;font-size:14px;text-decoration:none;box-shadow:0 2px 7px #4b00120d}.home-link:hover{background:#fff0f3;border-color:#ce7586}.home-link:focus-visible{outline:3px solid #b71932;outline-offset:3px}</style><style id="floating-navigation-styles">
@@ -389,7 +389,7 @@ function relationMarkup(w){
  if(!r.syn.length&&!r.ant.length)return '';
  return '<div class="relation-list">'+(r.syn.length?'<div class="relation-line"><span class="relation-tag syn">Synonyms</span><span>'+r.syn.map(x=>escapeHTML(x)).join(' · ')+'</span></div>':'')+(r.ant.length?'<div class="relation-line"><span class="relation-tag ant">Antonyms</span><span>'+r.ant.map(escapeHTML).join(' · ')+'</span></div>':'')+'</div>';
 }
-// Highlight prepositions only; never automatically bold vocabulary.
+// Highlight prepositions in red and bold to match vocabulary heading weight.
 const emphasisById={};
 // Separate every synonym/antonym into a full word card, while showing its peers below.
 // Preserve the original IDs for the first word so existing learning progress remains valid.

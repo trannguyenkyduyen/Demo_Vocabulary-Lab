@@ -121,7 +121,7 @@
 .relation-tag.ant{background:#fff0ef;color:#b73542}
 
 /* V12: meaningful collocation/preposition highlights and compact mastery icon */
-.word-focus{color:#c21c3a;font-weight:400!important}
+.word-focus{color:#c21c3a;font-weight:700!important}
 .word-grid .tile.tile-mastered .word-focus{color:#a44756}
 .word-grid .tile .row:first-child{align-items:center}
 .word-card-icons{display:flex;gap:6px;align-items:center;flex-shrink:0}
@@ -207,7 +207,7 @@ function relationMarkup(w){
  if(!r.syn.length&&!r.ant.length)return '';
  return '<div class="relation-list">'+(r.syn.length?'<div class="relation-line"><span class="relation-tag syn">Synonyms</span><span>'+r.syn.map(x=>escapeHTML(x)).join(' · ')+'</span></div>':'')+(r.ant.length?'<div class="relation-line"><span class="relation-tag ant">Antonyms</span><span>'+r.ant.map(escapeHTML).join(' · ')+'</span></div>':'')+'</div>';
 }
-// Highlight prepositions only; never automatically bold vocabulary.
+// Highlight prepositions in red and bold to match vocabulary heading weight.
 const emphasisById={
 'w010':['by'],'w011':['in'],'w012':['at','from'],
 'w014':['out','of'],'w015':['from'],'w025':['with'],'w026':['from'],
