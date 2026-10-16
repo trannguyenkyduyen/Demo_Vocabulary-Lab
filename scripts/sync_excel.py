@@ -5,14 +5,41 @@ from openpyxl import load_workbook
 SHARE_URL = os.environ.get('ONEDRIVE_SHARE_URL', '').strip()
 if not SHARE_URL:
     raise SystemExit('Missing ONEDRIVE_SHARE_URL GitHub Actions secret')
-# OneDrive Personal public share links commonly support a download=1 query flag.
-sep = '&' if '?' in SHARE_URL else '?'
-url = SHARE_URL + sep + 'download=1'
-req = Request(url, headers={'User-Agent': 'Mozilla/5.0 VocabularyLabSync/1.0'})
-with urlopen(req, timeout=45) as response:
-    raw = response.read(15_000_000)
-if not zipfile.is_zipfile(io.BytesIO(raw)):
-    raise SystemExit('OneDrive returned a webpage rather than an XLSX file. Check public sharing or download link. No changes committed.')
+# Try several public OneDrive download endpoints. Never publish an HTML login/view page.
+import base64
+from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
+
+def add_query(link, **params):
+    p = urlsplit(link)
+    q = dict(parse_qsl(p.query, keep_blank_values=True))
+    q.update(params)
+    return urlunsplit((p.scheme, p.netloc, p.path, urlencode(q), p.fragment))
+
+share_token = 'u!' + base64.urlsafe_b64encode(SHARE_URL.encode('utf-8')).decode('ascii').rstrip('=')
+urls = [
+    f'https://api.onedrive.com/v1.0/shares/{share_token}/root/content',
+    f'https://api.onedrive.com/v1.0/shares/{share_token}/driveItem/content',
+    add_query(SHARE_URL, download='1'),
+    add_query(SHARE_URL, download='true'),
+]
+raw = None
+for index, url in enumerate(urls, 1):
+    try:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/octet-stream'})
+        with urlopen(req, timeout=35) as response:
+            data = response.read(15_000_001)
+        if len(data) > 15_000_000:
+            print(f'Download method {index}: file too large')
+            continue
+        if zipfile.is_zipfile(io.BytesIO(data)):
+            raw = data
+            print(f'Download method {index}: valid XLSX received')
+            break
+        print(f'Download method {index}: returned non-XLSX content')
+    except Exception as exc:
+        print(f'Download method {index}: {type(exc).__name__}: {exc}')
+if raw is None:
+    raise SystemExit('Could not download public XLSX through available OneDrive endpoints. Existing data remains unchanged. OneDrive authentication or a different sync route may be needed.')
 wb = load_workbook(io.BytesIO(raw), read_only=True, data_only=True)
 if 'Vocabulary' not in wb.sheetnames:
     raise SystemExit('Missing Vocabulary sheet')
