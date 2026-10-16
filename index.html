@@ -26,7 +26,36 @@
 .topic.live:hover{box-shadow:0 8px 22px #33333316}
 .topic:not(.live){opacity:.78}
 @media(max-width:470px){.grades{max-width:100%}.topics-head{margin-top:30px}}
-</style></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="12"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">1 topic available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
+</style><style>
+/* Dark mode: only darken surfaces; preserve grade colors and topic gradients */
+html[data-lab-theme="dark"]{color-scheme:dark;--ink:#f4edf0;--muted:#bcb0b6;--line:#4a4149}
+html[data-lab-theme="dark"] body{background:#15171d;color:#f4edf0}
+html[data-lab-theme="dark"] .hero{background:linear-gradient(120deg,#86142b,#b82942)}
+html[data-lab-theme="dark"] .grade{background:#262831;color:#f4edf0;border-color:#514751}
+html[data-lab-theme="dark"] .grade[data-grade="10"][aria-pressed="true"]{background:#193454;border-color:#67aaff;color:#a8d3ff}
+html[data-lab-theme="dark"] .grade[data-grade="11"][aria-pressed="true"]{background:#1b3c2b;border-color:#68c98b;color:#a9ebbd}
+html[data-lab-theme="dark"] .grade[data-grade="12"][aria-pressed="true"]{background:#4a2431;border-color:#ef7893;color:#ffb5c5}
+html[data-lab-theme="dark"] .grade .status{color:#bcb0b6}
+html[data-lab-theme="dark"] .grade[aria-pressed="true"] .status{color:inherit}
+html[data-lab-theme="dark"] .main[data-active-grade="10"]{--topic-accent:#8dc3ff;--topic-border:#3c6085;--topic-tint:#1e3149}
+html[data-lab-theme="dark"] .main[data-active-grade="11"]{--topic-accent:#90e0a6;--topic-border:#3a7252;--topic-tint:#1d3929}
+html[data-lab-theme="dark"] .main[data-active-grade="12"]{--topic-accent:#ffa5b8;--topic-border:#754455;--topic-tint:#3b2530}
+html[data-lab-theme="dark"] .topic,html[data-lab-theme="dark"] .topic.live{background:linear-gradient(130deg,#282a33 12%,var(--topic-tint) 100%);border-color:var(--topic-border);color:#f4edf0}
+html[data-lab-theme="dark"] .topic .number{color:var(--topic-accent)}
+html[data-lab-theme="dark"] .topic .bottom{color:#c5b8bf}
+html[data-lab-theme="dark"] .available{background:#20412f;color:#a9f2c4;border-color:#427c58}
+html[data-lab-theme="dark"] .empty{background:#252730;color:#bcb0b6;border-color:#574750}
+html[data-lab-theme="dark"] .empty strong{color:#f4edf0}
+.theme-switch{position:fixed;top:14px;right:14px;z-index:99999;display:inline-flex;align-items:center;gap:7px;
+ background:#fff!important;color:#6f2035!important;border:1px solid #e9b6c2!important;
+ border-radius:999px;padding:9px 13px;font:700 13px system-ui,sans-serif;
+ box-shadow:0 3px 15px #0002;cursor:pointer}
+html[data-lab-theme="dark"] .theme-switch{background:#38323c!important;color:#ffe0e8!important;border-color:#a65b70!important}
+.theme-switch:focus-visible{outline:3px solid #f09aaf;outline-offset:3px}
+@media(max-width:520px){.theme-switch{top:9px;right:9px;padding:7px 10px;font-size:12px}}
+</style><script>
+(function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
+</script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="12"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">1 topic available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
 const heading=document.getElementById('topics-title');
 const buttons=[...document.querySelectorAll('.grade')], content=document.getElementById('topics-content'), count=document.getElementById('topic-count');
 const topicsByGrade={
@@ -56,4 +85,24 @@ function showGrade(grade){
  content.replaceChildren(grid);
 }
 buttons.forEach(b=>b.addEventListener('click',()=>showGrade(b.dataset.grade)));showGrade('12');
+</script><button class="theme-switch" type="button" id="lab-theme-switch" aria-label="Chuyển chế độ sáng tối"></button>
+<script>
+(function(){
+ const key='my-vocabulary-lab-theme',btn=document.getElementById('lab-theme-switch');
+ function render(){
+  const dark=document.documentElement.dataset.labTheme==='dark';
+  btn.textContent=dark?'☀️ Chế độ sáng':'🌙 Chế độ tối';
+  btn.setAttribute('aria-pressed',String(dark));
+ }
+ btn.addEventListener('click',function(){
+  const next=document.documentElement.dataset.labTheme==='dark'?'light':'dark';
+  document.documentElement.dataset.labTheme=next;
+  try{localStorage.setItem(key,next)}catch(e){}
+  render();
+ });
+ window.addEventListener('storage',function(e){
+  if(e.key===key){document.documentElement.dataset.labTheme=e.newValue==='dark'?'dark':'light';render()}
+ });
+ render();
+})();
 </script></body></html>

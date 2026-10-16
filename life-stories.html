@@ -159,6 +159,12 @@
 
 .quick-modes button[data-quick-screen]{display:flex;align-items:center;gap:12px;text-align:left;}
 .quick-modes button[data-quick-screen] .nav-icon{width:21px;height:21px;min-width:21px;flex-shrink:0;color:#a51d37;}
+
+/* Dark mode refinement: readable course names and schedules */
+html[data-lab-theme="dark"] .course-line{background:#30313b!important;border:1px solid #504954!important}
+html[data-lab-theme="dark"] .course-line b{color:#ffb3c3!important;opacity:1!important}
+html[data-lab-theme="dark"] .course-line span{color:#f1e9ee!important;opacity:1!important}
+html[data-lab-theme="dark"] .panel h2,html[data-lab-theme="dark"] .panel h3{color:#fff1f5!important}
 </style><style>
 .student-report{margin:18px 0;background:#fff;border:1px solid #edd5da;border-radius:17px;padding:19px}.student-report h2{font-size:19px;margin:0 0 8px;color:#8d1b31}.student-report p{font-size:13px;color:#745a61;line-height:1.55}.report-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.report-fields label{font-size:13px;font-weight:700;color:#703443;display:flex;flex-direction:column;gap:6px}.report-fields input{border:1px solid #e1b6bf;border-radius:10px;padding:11px;min-width:0}.report-preview{background:#fff6f7;padding:12px;border-radius:12px;font-size:13px;line-height:1.8}.report-message{font-size:13px;margin:10px 0 0}.report-message.error{color:#a21932}.report-message.pending{color:#8d5b16}@media(max-width:560px){.report-fields{grid-template-columns:1fr}}
 .word-grid .tile[data-word-id]{cursor:pointer}.word-grid .tile[data-word-id]:focus-visible{outline:3px solid #bd2a43;outline-offset:3px}.home-link{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;margin-bottom:15px;background:#fff;color:#9b1931;border:1px solid #efcbd2;border-radius:11px;font-weight:750;font-size:14px;text-decoration:none;box-shadow:0 2px 7px #4b00120d}.home-link:hover{background:#fff0f3;border-color:#ce7586}.home-link:focus-visible{outline:3px solid #b71932;outline-offset:3px}</style><style id="floating-navigation-styles">
@@ -174,6 +180,166 @@
 .quick-modes{display:none;position:absolute;right:48px;bottom:0;width:min(235px,calc(100vw - 75px));max-height:min(420px,75vh);overflow:auto;padding:10px;background:#fff;border:1px solid #efcbd2;border-radius:14px;box-shadow:0 8px 28px #4b001130}
 .quick-modes.open{display:block}.quick-modes strong{display:block;margin:3px 5px 8px;color:#7b1d30;font-size:13px}.quick-modes button{display:block;width:100%;padding:10px 9px;margin:3px 0;border:0;border-radius:8px;background:#fff7f8;text-align:left;color:#672033;font:600 13px/1.35 Arial,sans-serif;cursor:pointer}
 @media(max-width:600px){.floating-nav{right:9px;gap:6px}.floating-nav .quick-btn{width:36px;height:36px;font-size:20px}}
+</style><style>
+/* Shared light/dark mode — same setting across every page */
+html[data-lab-theme="dark"]{color-scheme:dark;--bg:#15171d;--ink:#f3edf0;--muted:#bdb0b6;--line:#45404a;--red:#ff758c;--teal:#e45070;--deep:#9b2942}
+html[data-lab-theme="dark"] body{background:#15171d!important;color:#f3edf0!important}
+html[data-lab-theme="dark"] .hero{background:linear-gradient(120deg,#4a1224,#84233b)!important}
+html[data-lab-theme="dark"] .stat,html[data-lab-theme="dark"] .panel,html[data-lab-theme="dark"] .tile,
+html[data-lab-theme="dark"] .grade,html[data-lab-theme="dark"] .topic,
+html[data-lab-theme="dark"] .empty{background:#23252d!important;color:#f3edf0!important;border-color:#49414b!important}
+html[data-lab-theme="dark"] .main{--topic-accent:#f2a1b2;--topic-border:#57434c;--topic-tint:#2b252e}
+html[data-lab-theme="dark"] .grade[aria-pressed="true"]{background:#38313d!important;border-color:#ed8ba2!important;color:#ffd7df!important}
+html[data-lab-theme="dark"] .topic .number,html[data-lab-theme="dark"] .topic h3{color:#f6d4de!important}
+html[data-lab-theme="dark"] .topic .bottom,html[data-lab-theme="dark"] .count,
+html[data-lab-theme="dark"] .status{color:#c6b8bf!important}
+html[data-lab-theme="dark"] .available{background:#20412f!important;color:#a9f2c4!important;border-color:#427c58!important}
+html[data-lab-theme="dark"] button:not(.theme-switch),html[data-lab-theme="dark"] input,
+html[data-lab-theme="dark"] select,html[data-lab-theme="dark"] textarea,
+html[data-lab-theme="dark"] .chip,html[data-lab-theme="dark"] .btn,
+html[data-lab-theme="dark"] .notice,html[data-lab-theme="dark"] .flash,
+html[data-lab-theme="dark"] .group-picker,html[data-lab-theme="dark"] .course-line{
+ background:#2c2d36!important;color:#f3edf0!important;border-color:#59515e!important}
+html[data-lab-theme="dark"] button.active:not(.theme-switch),
+html[data-lab-theme="dark"] .btn.primary,html[data-lab-theme="dark"] .chip.active{
+ background:#a62d4c!important;color:#fff!important}
+html[data-lab-theme="dark"] .tile.tile-selected{background:#382732!important;border-color:#db6a83!important}
+html[data-lab-theme="dark"] .tile.tile-mastered{background:#303139!important;opacity:.65}
+html[data-lab-theme="dark"] .tile.tile-mastered h3,html[data-lab-theme="dark"] .tile.tile-mastered p{color:#d4cbd0}
+html[data-lab-theme="dark"] .footer,html[data-lab-theme="dark"] footer{border-color:#45404a!important}
+.theme-switch{position:fixed;top:14px;right:14px;z-index:99999;display:inline-flex;align-items:center;gap:7px;
+ background:#fff!important;color:#6f2035!important;border:1px solid #e9b6c2!important;
+ border-radius:999px;padding:9px 13px;font:700 13px system-ui,sans-serif;
+ box-shadow:0 3px 15px #0002;cursor:pointer}
+html[data-lab-theme="dark"] .theme-switch{background:#38323c!important;color:#ffe0e8!important;border-color:#a65b70!important}
+.theme-switch:focus-visible{outline:3px solid #f09aaf;outline-offset:3px}
+@media(max-width:520px){.theme-switch{top:9px;right:9px;padding:7px 10px;font-size:12px}}
+
+/* Dark mode contrast fixes — activity icons and learning progress */
+html[data-lab-theme="dark"] .mode-panel .nav button .nav-icon,
+html[data-lab-theme="dark"] .quick-modes button[data-quick-screen] .nav-icon{color:#ff8198!important;stroke:currentColor!important}
+html[data-lab-theme="dark"] .mode-panel .nav button.active .nav-icon{color:#ffffff!important;stroke:currentColor!important}
+html[data-lab-theme="dark"] .mode-panel .nav button.active{background:#a62d4c!important;color:#fff!important;border-color:#ed829a!important}
+html[data-lab-theme="dark"] .dashboard h2{color:#ffb3c1!important}
+html[data-lab-theme="dark"] .dashboard.panel{background:#24252d!important;border-color:#514550!important}
+html[data-lab-theme="dark"] .dashboard .muted{color:#d2c3c9!important}
+html[data-lab-theme="dark"] .dashboard .dash-grid>div{border-color:#59505a!important}
+</style><script>
+(function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
+</script><style id="lab-dark-contrast-fixes">
+/* Dark mode: flashcard front/back remain visually distinct and readable */
+html[data-lab-theme="dark"] #flashCard.flash:not(.is-flipped){background:#50303d!important;border:2px solid #ff9db1!important;color:#fff1f5!important;box-shadow:0 8px 26px #0003!important}
+html[data-lab-theme="dark"] #flashCard.flash.is-flipped{background:#252b39!important;border:2px solid #8da9ce!important;color:#f8fbff!important;box-shadow:inset 0 0 0 2px #39465a!important}
+html[data-lab-theme="dark"] #flashCard.flash h2,html[data-lab-theme="dark"] #flashCard.flash #flashText{color:inherit!important;opacity:1!important}
+html[data-lab-theme="dark"] #flashCard.flash.is-flipped #flashHint,html[data-lab-theme="dark"] #flashCard.flash.is-flipped .flash-example{color:#e2eaf5!important;opacity:1!important}
+html[data-lab-theme="dark"] #flashCard.flash:not(.is-flipped) #flashHint,html[data-lab-theme="dark"] #flashCard.flash:not(.is-flipped) .flash-example{color:#ffd4de!important;opacity:1!important}
+/* Logo: remove bright white plate without altering embedded image */
+html[data-lab-theme="dark"] .logo-plate,html[data-lab-theme="dark"] .footer-logo{background:#292a34!important;border-color:#56505e!important;box-shadow:none!important}
+/* Student report: dark surfaces and accessible text */
+html[data-lab-theme="dark"] .student-report{background:#252630!important;border-color:#55505c!important;color:#f4edf1!important}
+html[data-lab-theme="dark"] .student-report h2{color:#ffb6c7!important}
+html[data-lab-theme="dark"] .student-report p,html[data-lab-theme="dark"] .student-report label,html[data-lab-theme="dark"] .student-report .report-message{color:#e1d5db!important}
+html[data-lab-theme="dark"] .student-report .report-preview{background:#32303b!important;color:#f5edf2!important;border:1px solid #62545f!important}
+html[data-lab-theme="dark"] .student-report input{background:#1b1d26!important;color:#fff!important;border-color:#71606d!important}
+html[data-lab-theme="dark"] .student-report input::placeholder{color:#bdb1ba!important}
+html[data-lab-theme="dark"] .student-report .report-message.error{color:#ff9ea9!important}
+html[data-lab-theme="dark"] .student-report .report-message.pending{color:#ffe1a0!important}
+</style><style id="lab-dark-fixes-v4">
+/* V4: contrast corrections requested for dark mode only */
+html[data-lab-theme="dark"] .journey-card{background:#2c2e38!important;color:#f8f2f5!important;border-color:#615967!important}
+html[data-lab-theme="dark"] .journey-card.active{background:#343944!important;border-color:#67c8a5!important}
+html[data-lab-theme="dark"] .journey-card small{color:#d3c6ce!important}
+html[data-lab-theme="dark"] .journey-card .journey-words{color:#a4e1c7!important}
+html[data-lab-theme="dark"] .journey-detail{background:#27362f!important;border-color:#568570!important;color:#f5f8f5!important}
+html[data-lab-theme="dark"] .journey-detail h3{color:#ffe0e8!important}
+html[data-lab-theme="dark"] .journey-word{border-color:#4d6558!important}
+html[data-lab-theme="dark"] .journey-word b{color:#c7f6de!important}
+html[data-lab-theme="dark"] .journey-word p{color:#f0e4e9!important;opacity:1!important}
+html[data-lab-theme="dark"] .journey-word button{background:#343e38!important;color:#f8fbf8!important;border-color:#6d927d!important}
+html[data-lab-theme="dark"] .group-section{background:#292630!important;border-color:#dc667e!important;color:#f6eff3!important}
+html[data-lab-theme="dark"] .group-section-heading h3{color:#ffc2cf!important}
+html[data-lab-theme="dark"] .group-section-heading p{color:#e9cbd3!important}
+html[data-lab-theme="dark"] .group-section-icon{background:#4a3540!important}
+html[data-lab-theme="dark"] .group-select-wrap select{background:#33303b!important;color:#fff!important;border-color:#947582!important}
+html[data-lab-theme="dark"] .relation-line{color:#d1e3ec!important}
+html[data-lab-theme="dark"] .relation-tag.syn{background:#28503d!important;color:#bcf6d6!important}
+html[data-lab-theme="dark"] .relation-tag.ant{background:#59323e!important;color:#ffd3dc!important}
+html[data-lab-theme="dark"] .word-grid .tile .relation-line>span:not(.relation-tag){color:#cce4ed!important}
+html[data-lab-theme="dark"] .answers button.correct,html[data-lab-theme="dark"] button.correct{background:#24513a!important;color:#e1ffe9!important;border-color:#69d59b!important;opacity:1!important}
+html[data-lab-theme="dark"] .answers button.wrong,html[data-lab-theme="dark"] button.wrong{background:#61303a!important;color:#ffe2e6!important;border-color:#f48b9c!important;opacity:1!important}
+html[data-lab-theme="dark"] .answers button:disabled:not(.correct):not(.wrong){color:#c9c4cd!important;opacity:.78!important}
+html[data-lab-theme="dark"] .match button.matched{background:#28523d!important;color:#e6fff0!important;border-color:#70d9a1!important;opacity:.88!important}
+html[data-lab-theme="dark"] .match button.selected{background:#4c3545!important;color:#fff4f7!important}
+html[data-lab-theme="dark"] .notice{background:#30323d!important;color:#f3edf4!important;border-color:#565460!important}
+html[data-lab-theme="dark"] .logo-plate img,html[data-lab-theme="dark"] .footer-logo img{filter:none!important}
+</style><style>
+/* Listening: natural inline blank and clear corrections, in both themes */
+#listening .listen-answer-wrap{display:inline;vertical-align:baseline;margin:0 .15em}
+#listening .listen-inline-input,
+html[data-lab-theme="dark"] #listening .listen-inline-input{
+ display:inline-block!important;vertical-align:baseline;min-width:5ch;max-width:85%;
+ background:transparent!important;border:0!important;border-bottom:1.5px dashed currentColor!important;
+ border-radius:0!important;box-shadow:none!important;padding:0 3px 1px!important;
+ margin:0!important;font:inherit!important;font-weight:700!important;line-height:inherit!important;
+ text-align:center;color:inherit!important;outline-offset:2px;
+}
+#listening .listen-inline-input::placeholder{opacity:.45;color:inherit!important}
+#listening .listen-result-inline{display:inline;white-space:normal;margin:0 .12em;font-weight:700}
+#listening .listen-result-wrong{color:#c71e36!important;text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:currentColor}
+#listening .listen-result-correct{color:#087d3d!important;font-weight:800}
+html[data-lab-theme="dark"] #listening .listen-result-wrong{color:#ff8999!important}
+html[data-lab-theme="dark"] #listening .listen-result-correct{color:#80e9aa!important}
+</style><style id="dark-navigation-refinement">
+/* Dark navigation: subdued panels, brighter navigation icons */
+html[data-lab-theme="dark"] .floating-nav .quick-btn,
+html[data-lab-theme="dark"] .floating-nav a.quick-btn,
+html[data-lab-theme="dark"] .home-link{
+ background:#282a34!important;color:#ffb3c3!important;border-color:#514753!important;
+ box-shadow:0 3px 12px #0005!important;
+}
+html[data-lab-theme="dark"] .floating-nav .quick-btn svg,
+html[data-lab-theme="dark"] .floating-nav .quick-btn svg *{stroke:currentColor!important}
+html[data-lab-theme="dark"] .floating-nav .quick-btn:hover,
+html[data-lab-theme="dark"] .home-link:hover{background:#39303d!important;color:#ffe4ea!important;border-color:#a8687d!important}
+html[data-lab-theme="dark"] .quick-groups,
+html[data-lab-theme="dark"] .quick-modes{background:#20222b!important;border-color:#4e4653!important;box-shadow:0 8px 28px #0007!important}
+html[data-lab-theme="dark"] .quick-groups strong,
+html[data-lab-theme="dark"] .quick-modes strong{color:#ffc2cf!important}
+html[data-lab-theme="dark"] .quick-groups button,
+html[data-lab-theme="dark"] .quick-modes button{background:#30303a!important;color:#f7eaf0!important;border-color:#554a57!important}
+html[data-lab-theme="dark"] .quick-groups button:hover,
+html[data-lab-theme="dark"] .quick-modes button:hover{background:#453540!important;color:#fff!important}
+</style><style id="lab-journey-stage-gradients-v5">
+/* Selected timeline card follows its numbered circle's unique color. */
+html[data-lab-theme="dark"] .journey-card.active{
+ background:linear-gradient(115deg,color-mix(in srgb,var(--stage-color) 67%,#20232c),color-mix(in srgb,var(--stage-color) 32%,#292b35))!important;
+ border-color:var(--stage-color)!important;
+ border-left-color:var(--stage-color)!important;
+ box-shadow:0 6px 18px #0003!important;
+ color:#fff!important;
+}
+html[data-lab-theme="dark"] .journey-card.active strong{color:#fff!important}
+html[data-lab-theme="dark"] .journey-card.active small{color:#f3eefa!important}
+html[data-lab-theme="dark"] .journey-card.active .journey-words{color:#f0fff7!important}
+html[data-lab-theme="light"] .journey-card.active{
+ background:linear-gradient(115deg,color-mix(in srgb,var(--stage-color) 16%,white),color-mix(in srgb,var(--stage-color) 5%,white))!important;
+ border-color:var(--stage-color)!important;
+}
+</style><style id="lab-journey-gradient-fix-v6">
+/* Explicit stage gradients; override global active-button red in both themes. */
+html[data-lab-theme="dark"] .journey-timeline .journey-stage .journey-card.active,
+html[data-lab-theme="light"] .journey-timeline .journey-stage .journey-card.active{color:#fff!important;background:linear-gradient(115deg,#447cb1,#649bc1)!important;border-color:#3987b9!important;border-left:6px solid #3987b9!important}
+html[data-lab-theme="dark"] .journey-timeline .journey-stage:nth-child(2) .journey-card.active,
+html[data-lab-theme="light"] .journey-timeline .journey-stage:nth-child(2) .journey-card.active{background:linear-gradient(115deg,#2e8b77,#65aa96)!important;border-color:#329a7c!important}
+html[data-lab-theme="dark"] .journey-timeline .journey-stage:nth-child(3) .journey-card.active,
+html[data-lab-theme="light"] .journey-timeline .journey-stage:nth-child(3) .journey-card.active{background:linear-gradient(115deg,#94733a,#b99a61)!important;border-color:#b78b32!important}
+html[data-lab-theme="dark"] .journey-timeline .journey-stage:nth-child(4) .journey-card.active,
+html[data-lab-theme="light"] .journey-timeline .journey-stage:nth-child(4) .journey-card.active{background:linear-gradient(115deg,#885774,#ad809b)!important;border-color:#ad6489!important}
+html[data-lab-theme="dark"] .journey-timeline .journey-stage:nth-child(5) .journey-card.active,
+html[data-lab-theme="light"] .journey-timeline .journey-stage:nth-child(5) .journey-card.active{background:linear-gradient(115deg,#625b94,#9188b7)!important;border-color:#7769ae!important}
+html .journey-timeline .journey-stage .journey-card.active strong,
+html .journey-timeline .journey-stage .journey-card.active small,
+html .journey-timeline .journey-stage .journey-card.active .journey-words{color:#fff!important;opacity:1!important}
 </style></head><body><div class="wrap"><header class="hero"><div class="grade-label">GRADE 12 · VOCABULARY LAB</div><h1 id="topicTitle">LIFE STORIES</h1><p class="hero-tagline">Learn • Practice • Remember</p><p class="teacher-credit"><strong>Cô TRẦN NGUYỄN KỲ DUYÊN</strong></p></header><section class="stats"><div class="stat"><b id="totalCount">0</b><small>Vocabulary</small></div><div class="stat"><b id="knownCount">0</b><small>Mastered</small></div><div class="stat"><b id="mistakeCount">0</b><small>To review</small></div></section><section class="mode-panel panel"><h2 class="mode-heading">Chọn hoạt động học tập</h2><nav class="nav" aria-label="Learning modes"><button data-screen="bank" class="active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H5a2 2 0 0 0-2 1Z"/><path d="M21 18V5a2 2 0 0 0-2-2h-3a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h3a2 2 0 0 1 2 1Z"/></svg><span>Word Bank</span></button><button data-screen="flash"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="5" rx="1"/><path d="M4 13h16M4 17h16M7 21h10"/></svg><span>Flashcards</span></button><button data-screen="mcq"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 2 2 4-4M14 6h7M4 14l2 2 4-4M14 14h7M4 21h17"/></svg><span>MCQ</span></button><button data-screen="matching"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4h3a2 2 0 1 1 0 4H3v6a2 2 0 0 0 2 2h5v-3a2 2 0 1 1 4 0v3h5a2 2 0 0 0 2-2v-5h-3a2 2 0 1 1 0-4h3V5a2 2 0 0 0-2-2h-6v3a2 2 0 1 1-4 0V3Z"/></svg><span>Matching</span></button><button data-screen="listening"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="3" y="13" width="4" height="8" rx="2"/><rect x="17" y="13" width="4" height="8" rx="2"/></svg><span>Listening</span></button><button data-screen="mistakes"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg><span>Review Mistakes</span></button><button data-screen="personal"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10"/></svg><span>My Vocabulary</span></button><button data-screen="profile"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Profile giáo viên</span></button></nav></section>
 <main><section class="dashboard panel" aria-label="Learning progress"><h2>📊 My Learning Progress</h2><div class="dash-grid"><div><strong id="dashKnown">0</strong><small>Mastered</small></div><div><strong id="dashRemaining">0</strong><small>Not Mastered</small></div><div><strong id="dashAccuracy">—</strong><small>MCQ accuracy</small></div><div><strong id="dashMistakes">0</strong><small>Need review</small></div></div><div class="progress-track"><div id="dashBar"></div></div><p id="dashNote" class="muted"></p></section><section id="bank" class="screen active"><div class="panel journey-panel"><div class="journey-head"><div><p class="journey-kicker">VOCABULARY BANK · SPECIAL SECTION</p><h2>↗ My Life Journey</h2><p class="muted">Every great story begins somewhere. · Khám phá và sắp xếp các chặng trong hành trình cuộc đời.</p></div></div><div class="journey-tabs"><button type="button" class="btn primary" id="journeyExploreBtn">01 · Explore</button><button type="button" class="btn" id="journeyPracticeBtn">02 · Practice</button></div><div id="journeyExplore"><p class="muted">Chạm vào từng chặng để xem từ vựng, nghĩa và câu ví dụ. Mũi tên thể hiện một hành trình minh họa.</p><div id="journeyTimeline" class="journey-timeline"></div><div id="journeyDetail" class="journey-detail" aria-live="polite"></div></div><div id="journeyPractice" hidden><p class="muted">Dùng ↑ ↓ để sắp xếp các sự kiện theo trình tự của <strong>một câu chuyện cuộc đời điển hình</strong>, rồi kiểm tra kết quả.</p><div id="journeyArrange" class="journey-arrange"></div><div class="actions"><button class="btn primary" type="button" id="journeyCheck">Check Answers</button><button class="btn" type="button" id="journeyReset">Shuffle again</button></div><div id="journeyFeedback" class="journey-feedback" aria-live="polite"></div></div></div><div class="panel"><h2>Vocabulary Bank</h2><div class="group-section"><div class="group-section-heading"><span class="group-section-icon">📚</span><div><h3>CHỌN NHÓM TỪ VỰNG</h3><p>Chọn nhóm bạn muốn học hoặc ôn tập</p></div></div><div class="group-select-wrap"><select id="groupFilter" aria-label="Chọn nhóm từ vựng"></select></div></div><div class="toolbar search-toolbar"><input id="search" type="search" placeholder="🔎 Search English / Vietnamese..." aria-label="Search vocabulary"></div><div class="chips" id="bankFilters"></div><div class="row"><span id="bankSummary" class="muted"></span><div class="bulk-actions"><button class="btn" id="selectVisible">☆ Select All</button><button class="btn" id="unselectVisible">✕ Unselect All</button></div></div></div><div id="wordGrid" class="word-grid"></div></section>
 <section id="flash" class="screen"><div class="panel"><h2>Flashcards</h2><div class="toolbar"><select class="scope" aria-label="Study word scope"></select><button class="btn" id="shuffleFlash">🔀 Shuffle</button></div><p id="flashProgress" class="muted"></p><div id="flashCard" class="flash" role="button" tabindex="0" aria-label="Flip flashcard"><h2 id="flashText"></h2><p id="flashHint" class="muted">Tap to flip</p><div id="flashExample" class="flash-example" aria-live="polite"></div></div><div class="actions"><button class="btn" id="prevFlash">← Previous</button><button class="btn" id="speakFlash">🔊 Word</button><button class="btn" id="speakFlashSentence">🔊 Sentence</button><button class="btn" id="knownFlash">✓ Mastered</button><button class="btn primary" id="nextFlash">Next →</button></div></div></section>
@@ -342,7 +508,7 @@ function sentenceFor(w){return (w.example||'').trim()||`We discussed ${w.en} in 
 function findTargetSpan(w,sentence){let terms=[w.en,...w.en.split(/\s*=\s*|\s*\/\s*/).map(x=>x.trim())].filter(Boolean);let aliases={'be raised by = be brought up by':['raised by','brought up by'],'a wealthy / poor family':['wealthy family','poor family'],'at / from an early age':['from an early age','at an early age'],'devote / dedicate one\'s life to':['devote his life to','dedicate her life to'],'set up / establish':['set up','establish'],'change the course of history':['change the course of history']};terms.push(...(aliases[w.en]||[]));for(let t of terms){let ix=sentence.toLowerCase().indexOf(t.toLowerCase());if(ix>=0)return [ix,ix+t.length]}let variants={'persistent = persevering':'persistent','challenge = hardship = adversity':'challenge','setback = failure':'setback','achievement = accomplishment':'achievement','influence = impact = effect on':'influence','be born':'born','attend':'attended','enroll in':'enrolled in','major in':'major in','earn a degree':'earn a degree','start one\'s career':'started his career','work as':'worked as','join':'joined','found':'founded','pursue':'pursue','face':'face','overcome':'overcame','achieve':'achieved','succeed':'succeeded','gain recognition':'gained recognition','contribute to':'contributed to','retire':'retired','pass away':'passed away','leave a legacy':'left a legacy','serve as a role model':'serve as a role model','follow in somebody\'s footsteps':'follow in her mother\'s footsteps','set an example for others':'set an example for others','achieve one\'s goal':'achieve her goal','be raised by = be brought up by':'raised by','grow up in':'grew up in','drop out of school':'drop out of school','graduate from':'graduate from','move abroad':'move abroad','struggle with':'struggle with','suffer from':'suffered from','bounce back from failure':'bounce back from failure'};let v=variants[w.en];if(v){let ix=sentence.toLowerCase().indexOf(v.toLowerCase());if(ix>=0)return [ix,ix+v.length]}let a=w.en.split(/[ =\/]/).filter(x=>x.length>3);for(let term of a){let ix=sentence.toLowerCase().indexOf(term.toLowerCase());if(ix>=0)return [ix,ix+term.length]}return [-1,-1]}
 function sentenceParts(w){let sentence=sentenceFor(w),span=findTargetSpan(w,sentence);if(span[0]<0){sentence=`We learned the expression ${w.en} in class.`;span=[sentence.toLowerCase().indexOf(w.en.toLowerCase()),sentence.toLowerCase().indexOf(w.en.toLowerCase())+w.en.length]}let hint=w.en.replace(/[A-Za-zÀ-ÿ0-9]/g,'_');return {sentence,before:sentence.slice(0,span[0]),after:sentence.slice(span[1]),hint}}
 function listenSentenceHTML(w){let p=sentenceParts(w);return escapeHTML(p.before)+'<span class="listen-answer-wrap"><input id="listenInput" class="listen-inline-input" type="text" autocomplete="off" spellcheck="false" aria-label="Missing word or phrase" placeholder="'+escapeHTML(p.hint)+'" style="width:'+Math.min(34,Math.max(9,w.en.length+2))+'ch"></span>'+escapeHTML(p.after)}
-function revealListenAnswer(w,good,given){let p=sentenceParts(w),test=$('listeningTest').checked;if(test){$('listenInput').classList.add('listen-locked');$('listenInput').disabled=true;return}let color=good?'listen-correct':'listen-incorrect';$('listenSentence').innerHTML=escapeHTML(p.before)+'<span class="listen-revealed '+color+'">'+escapeHTML(w.en)+'</span>'+escapeHTML(p.after);if(!good){$('listenFeedback').innerHTML='✗ Your answer: <strong>'+escapeHTML(given)+'</strong> · Correct answer: <strong>'+escapeHTML(w.en)+'</strong>'}}
+function revealListenAnswer(w,good,given){let p=sentenceParts(w),test=$('listeningTest').checked;if(test){$('listenInput').classList.add('listen-locked');$('listenInput').disabled=true;return}let answerHTML=good?'<span class="listen-result-correct">'+escapeHTML(w.en)+'</span>':'<span class="listen-result-wrong">'+escapeHTML(given)+'</span> <span class="listen-result-correct">'+escapeHTML(w.en)+'</span>';$('listenSentence').innerHTML=escapeHTML(p.before)+'<span class="listen-result-inline">'+answerHTML+'</span>'+escapeHTML(p.after);if(!good){$('listenFeedback').textContent='✗ Review the correction shown in the sentence.'}}
 
 function availableEnglishVoices(){return ('speechSynthesis'in window?speechSynthesis.getVoices():[]).filter(v=>/^en([-_]|$)/i.test(v.lang))}
 function voiceGender(v){let name=v.name.toLowerCase();if(/female|woman|samantha|victoria|karen|zira|susan|aria|jenny|ava|serena|moira|tessa|fiona|allison|kate|emily|salli/.test(name))return 'female';if(/male|man|david|mark|daniel|alex|fred|george|guy|ryan|matthew|brian|joey|arthur|oliver/.test(name))return 'male';return null}
@@ -416,5 +582,25 @@ modeMenu.addEventListener('click',e=>{const btn=e.target.closest('[data-quick-sc
 menu.addEventListener('click',e=>{const btn=e.target.closest('[data-group-index]');if(!btn)return;const group=groups[Number(btn.dataset.groupIndex)][0];close();show('bank');document.getElementById('search').value='';document.getElementById('groupFilter').value=group;state.bankMode='all';renderBank();const target=document.getElementById('bank');if(target)scroll(target.getBoundingClientRect().top+window.scrollY-12)});
 document.addEventListener('click',e=>{if(!e.target.closest('.floating-nav'))close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
+</script><button class="theme-switch" type="button" id="lab-theme-switch" aria-label="Chuyển chế độ sáng tối"></button>
+<script>
+(function(){
+ const key='my-vocabulary-lab-theme',btn=document.getElementById('lab-theme-switch');
+ function render(){
+  const dark=document.documentElement.dataset.labTheme==='dark';
+  btn.textContent=dark?'☀️ Chế độ sáng':'🌙 Chế độ tối';
+  btn.setAttribute('aria-pressed',String(dark));
+ }
+ btn.addEventListener('click',function(){
+  const next=document.documentElement.dataset.labTheme==='dark'?'light':'dark';
+  document.documentElement.dataset.labTheme=next;
+  try{localStorage.setItem(key,next)}catch(e){}
+  render();
+ });
+ window.addEventListener('storage',function(e){
+  if(e.key===key){document.documentElement.dataset.labTheme=e.newValue==='dark'?'dark':'light';render()}
+ });
+ render();
 })();
 </script></body></html>
