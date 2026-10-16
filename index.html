@@ -55,14 +55,18 @@ html[data-lab-theme="dark"] .theme-switch{background:#38323c!important;color:#ff
 @media(max-width:520px){.theme-switch{top:9px;right:9px;padding:7px 10px;font-size:12px}}
 </style><script>
 (function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
-</script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="12"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">1 topic available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
+</script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="12"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">2 topics available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
 const heading=document.getElementById('topics-title');
 const buttons=[...document.querySelectorAll('.grade')], content=document.getElementById('topics-content'), count=document.getElementById('topic-count');
 const topicsByGrade={
  '10':['Family','Green living','Entertainment','Volunteering','Science','Technology','Gender equality','International organisations','Education','Protecting the environment','Holidays and tourism'],
  '11':['Healthy lifestyle','Health','Food & drinks','Sports','The generation gap','Cities / Urbanization','Protecting the environment','Culture','Education options for school leavers','Career / Job','Becoming independent','Social issues','Economy','Politics','Endangered species'],
- '12':['Life Stories',...Array.from({length:20},(_,i)=>'Topic '+String(i+2).padStart(2,'0'))]
+ '12':['Life Stories','Customs and Culture','Green Living','Cities and Urbanization','Career and Jobs','Technology','Science','News and Media','Endangered Species','Education','Holidays and Tourism','Health','Food and Drinks','Sports','Gender Equality','Relationships','Entertainment','International Organizations','Economy','Politics','Social Issues']
 };
+// Each Grade 12 topic has a stable, descriptive HTML filename.
+const grade12Files=['life-stories.html','customs-and-culture.html','green-living.html','cities-and-urbanization.html','career-and-jobs.html','technology.html','science.html','news-and-media.html','endangered-species.html','education.html','holidays-and-tourism.html','health.html','food-and-drinks.html','sports.html','gender-equality.html','relationships.html','entertainment.html','international-organizations.html','economy.html','politics.html','social-issues.html'];
+// Add a topic number here once its HTML file has been uploaded to GitHub.
+const publishedGrade12Topics=new Set([1,2]);
 function showGrade(grade){
  document.querySelector('.main').dataset.activeGrade=grade;
  heading.textContent='Grade '+grade+' · Topics';
@@ -71,9 +75,9 @@ function showGrade(grade){
  count.textContent=topics.length+' topics';
  const grid=document.createElement('div');grid.className='topics';
  topics.forEach((name,index)=>{
-  const live=grade==='12'&&index===0;
+  const live=grade==='12'&&publishedGrade12Topics.has(index+1);
   const el=document.createElement(live?'a':'article');el.className='topic'+(live?' live':'');
-  if(live)el.href='life-stories.html';
+  if(live)el.href=grade12Files[index];
   const no=String(index+1).padStart(2,'0');
   const number=document.createElement('span');number.className='number';number.textContent='TOPIC '+no;
   const title=document.createElement('h3');title.textContent=name;
