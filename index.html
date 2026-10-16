@@ -17,7 +17,7 @@
 .main{--topic-accent:#a51d37;--topic-border:#edb4bf;--topic-tint:#fff0f3}
 .main[data-active-grade="10"]{--topic-accent:#1757a3;--topic-border:#a9c9ee;--topic-tint:#edf5ff}
 .main[data-active-grade="11"]{--topic-accent:#217943;--topic-border:#a7dcb5;--topic-tint:#effaf2}
-.main[data-active-grade="11"]{--topic-accent:#a51d37;--topic-border:#edb4bf;--topic-tint:#fff0f3}
+.main[data-active-grade="12"]{--topic-accent:#a51d37;--topic-border:#edb4bf;--topic-tint:#fff0f3}
 .topics-head{margin-top:42px}
 .topics-head h2{color:var(--ink)}
 .topic{border-color:var(--topic-border);background:linear-gradient(130deg,#fff 12%,var(--topic-tint) 100%)}
@@ -31,7 +31,7 @@
 html[data-lab-theme="dark"]{color-scheme:dark;--ink:#f4edf0;--muted:#bcb0b6;--line:#4a4149}
 html[data-lab-theme="dark"] body{background:#15171d;color:#f4edf0}
 html[data-lab-theme="dark"] .hero{background:linear-gradient(120deg,#86142b,#b82942)}
-html[data-lab-theme="dark"] .grade{background:#262831;color:#f4edf0;border-color:#514751}
+html[data-lab-theme="dark"] .grade,html[data-lab-theme="dark"] .grade[data-grade="10"],html[data-lab-theme="dark"] .grade[data-grade="11"],html[data-lab-theme="dark"] .grade[data-grade="12"]{background:#262831;color:#f4edf0;border-color:#514751}
 html[data-lab-theme="dark"] .grade[data-grade="10"][aria-pressed="true"]{background:#193454;border-color:#67aaff;color:#a8d3ff}
 html[data-lab-theme="dark"] .grade[data-grade="11"][aria-pressed="true"]{background:#1b3c2b;border-color:#68c98b;color:#a9ebbd}
 html[data-lab-theme="dark"] .grade[data-grade="12"][aria-pressed="true"]{background:#4a2431;border-color:#ef7893;color:#ffb5c5}
@@ -39,7 +39,7 @@ html[data-lab-theme="dark"] .grade .status{color:#bcb0b6}
 html[data-lab-theme="dark"] .grade[aria-pressed="true"] .status{color:inherit}
 html[data-lab-theme="dark"] .main[data-active-grade="10"]{--topic-accent:#8dc3ff;--topic-border:#3c6085;--topic-tint:#1e3149}
 html[data-lab-theme="dark"] .main[data-active-grade="11"]{--topic-accent:#90e0a6;--topic-border:#3a7252;--topic-tint:#1d3929}
-html[data-lab-theme="dark"] .main[data-active-grade="11"]{--topic-accent:#ffa5b8;--topic-border:#754455;--topic-tint:#3b2530}
+html[data-lab-theme="dark"] .main[data-active-grade="12"]{--topic-accent:#ffa5b8;--topic-border:#754455;--topic-tint:#3b2530}
 html[data-lab-theme="dark"] .topic,html[data-lab-theme="dark"] .topic.live{background:linear-gradient(130deg,#282a33 12%,var(--topic-tint) 100%);border-color:var(--topic-border);color:#f4edf0}
 html[data-lab-theme="dark"] .topic .number{color:var(--topic-accent)}
 html[data-lab-theme="dark"] .topic .bottom{color:#c5b8bf}
@@ -53,6 +53,15 @@ html[data-lab-theme="dark"] .empty strong{color:#f4edf0}
 html[data-lab-theme="dark"] .theme-switch{background:#38323c!important;color:#ffe0e8!important;border-color:#a65b70!important}
 .theme-switch:focus-visible{outline:3px solid #f09aaf;outline-offset:3px}
 @media(max-width:520px){.theme-switch{top:9px;right:9px;padding:7px 10px;font-size:12px}}
+
+/* Selected grade keeps its own palette in Dark Mode */
+html[data-lab-theme="dark"] .grade[data-grade="10"][aria-pressed="true"]{background:#193454;color:#a8d3ff;border:2px solid #67aaff}
+html[data-lab-theme="dark"] .grade[data-grade="11"][aria-pressed="true"]{background:#1b3c2b;color:#a9ebbd;border:2px solid #68c98b}
+html[data-lab-theme="dark"] .grade[data-grade="12"][aria-pressed="true"]{background:#4a2431;color:#ffb5c5;border:2px solid #ef7893}
+html[data-lab-theme="dark"] .main[data-active-grade="11"] .available{background:#20412f;color:#a9f2c4;border-color:#427c58}
+html[data-lab-theme="dark"] .main[data-active-grade="12"] .available{background:#20412f;color:#a9f2c4;border-color:#427c58}
+html[data-lab-theme="dark"] .main[data-active-grade="12"] .topic.live .bottom{color:#ffb5c5}
+html[data-lab-theme="dark"] .main[data-active-grade="11"] .topic.live .bottom{color:#a9f2c4}
 </style><script>
 (function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
 </script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="11"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">5 topics available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
@@ -96,28 +105,34 @@ const topicFilesByGrade={
   "11.15.endangered-species.html"
  ],
  "12": [
-  "life-stories.html",
-  "customs-and-culture.html",
-  "green-living.html",
-  "cities-and-urbanization.html",
-  "career-and-jobs.html",
-  "technology.html",
-  "science.html",
-  "news-and-media.html",
-  "endangered-species.html",
-  "education.html",
-  "holidays-and-tourism.html",
-  "health.html",
-  "food-and-drinks.html",
-  "sports.html",
-  "gender-equality.html",
-  "relationships.html",
-  "entertainment.html",
-  "international-organizations.html",
-  "economy.html",
-  "politics.html",
-  "social-issues.html"
+  "12.01.life-stories.html",
+  "12.02.customs-and-culture.html",
+  "12.03.green-living.html",
+  "12.04.cities-and-urbanization.html",
+  "12.05.career-and-jobs.html",
+  "12.06.technology.html",
+  "12.07.science.html",
+  "12.08.news-and-media.html",
+  "12.09.endangered-species.html",
+  "12.10.education.html",
+  "12.11.holidays-and-tourism.html",
+  "12.12.health.html",
+  "12.13.food-and-drinks.html",
+  "12.14.sports.html",
+  "12.15.gender-equality.html",
+  "12.16.relationships.html",
+  "12.17.entertainment.html",
+  "12.18.international-organizations.html",
+  "12.19.economy.html",
+  "12.20.politics.html",
+  "12.21.social-issues.html"
  ]
+};
+// Already published topics: show Available immediately, even if a server blocks HEAD requests.
+const publishedTopics={
+ '10':[],
+ '11':['11.01.healthy-lifestyle.html'],
+ '12':['12.01.life-stories.html','12.02.customs-and-culture.html','12.03.green-living.html','12.12.health.html','12.16.relationships.html']
 };
 function showGrade(grade){
  document.querySelector('.main').dataset.activeGrade=grade;
@@ -134,15 +149,22 @@ function showGrade(grade){
   const title=document.createElement('h3');title.textContent=name;
   const bottom=document.createElement('span');bottom.className='bottom';bottom.textContent='Coming soon';
   el.append(number,title,bottom);grid.appendChild(el);
-  // On GitHub Pages, a new HTML file becomes available automatically after upload.
-  // Avoid hard-coded published-topic lists and avoid broken links to missing files.
-  fetch(filename,{method:'HEAD',cache:'no-store'}).then(response=>{
-   if(!response.ok || !el.isConnected)return;
+  function markAvailable(){
+   if(el.dataset.ready==='yes')return;
+   el.dataset.ready='yes';
    const link=document.createElement('a');link.className='topic live';link.href=filename;
    link.append(number,title,bottom);
    const tag=document.createElement('span');tag.className='available';tag.textContent='Available';
    bottom.replaceChildren(tag);el.replaceWith(link);
-  }).catch(()=>{});
+  }
+  if(publishedTopics[grade].includes(filename)){
+   markAvailable();
+  }else{
+   // Discover newly uploaded topics without needing to edit the homepage.
+   fetch(filename,{method:'GET',cache:'no-store'}).then(response=>{
+    if(response.ok && (el.isConnected || grid.contains(el)))markAvailable();
+   }).catch(()=>{});
+  }
  });
  content.replaceChildren(grid);
 }
