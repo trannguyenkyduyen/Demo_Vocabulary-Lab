@@ -13,7 +13,7 @@
 @media(max-width:470px){.grades{gap:7px}.grade,.grade[data-grade="10"],.grade[data-grade="11"],.grade[data-grade="12"]{min-height:59px;padding:9px 5px;border-radius:9px}.grade .name{font-size:15px}.grade .status{font-size:10px}}
 
 /* V7: centered grade switcher and grade-aware topic palette */
-.grades{margin:0 auto;max-width:630px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grades{margin:0 auto;max-width:630px;grid-template-columns:repeat(4,minmax(0,1fr))}
 .main{--topic-accent:#a51d37;--topic-border:#edb4bf;--topic-tint:#fff0f3}
 .main[data-active-grade="10"]{--topic-accent:#1757a3;--topic-border:#a9c9ee;--topic-tint:#edf5ff}
 .main[data-active-grade="11"]{--topic-accent:#217943;--topic-border:#a7dcb5;--topic-tint:#effaf2}
@@ -62,9 +62,59 @@ html[data-lab-theme="dark"] .main[data-active-grade="11"] .available{background:
 html[data-lab-theme="dark"] .main[data-active-grade="12"] .available{background:#20412f;color:#a9f2c4;border-color:#427c58}
 html[data-lab-theme="dark"] .main[data-active-grade="12"] .topic.live .bottom{color:#ffb5c5}
 html[data-lab-theme="dark"] .main[data-active-grade="11"] .topic.live .bottom{color:#a9f2c4}
+
+/* IELTS Lab: Champagne learning path */
+.grade[data-grade="ielts"]{background:#fff;color:var(--ink);border:1.5px solid #e7dfe1;border-radius:11px;min-height:66px;padding:12px 14px;gap:3px}
+.grade[data-grade="ielts"][aria-pressed="true"]{background:#fff5d9;border:2px solid #c48a16;color:#8b5c08}
+.main[data-active-grade="ielts"]{--topic-accent:#a87513;--topic-border:#e5c889;--topic-tint:#fff9ea}
+.ielts-intro{margin:0 0 24px;color:var(--muted);font-size:14px}
+.ielts-path{max-width:690px;margin:0 auto;display:flex;flex-direction:column}
+.ielts-step{display:grid;grid-template-columns:38px minmax(0,1fr);column-gap:16px;align-items:stretch}
+.ielts-rail{display:flex;align-items:center;flex-direction:column}
+.ielts-number{width:34px;height:34px;border-radius:50%;background:#fff5d9;border:1.5px solid #ddb66b;display:grid;place-items:center;font-weight:750;color:#956812;font-size:14px;flex-shrink:0}
+.ielts-line{width:2px;background:#e8d3a8;flex:1;min-height:20px}
+.ielts-step:last-child .ielts-line{display:none}
+.ielts-step-body{padding-bottom:17px}
+.ielts-level{display:block;width:100%;background:#fff;border:1.5px solid #e5ddcf;border-radius:15px;padding:19px 22px;text-align:left;color:var(--ink);font:inherit;cursor:pointer;transition:.18s}
+.ielts-level:hover{border-color:#c48a16;transform:translateY(-1px)}
+.ielts-level:focus-visible{outline:3px solid #e4b957;outline-offset:2px}
+.ielts-level[aria-expanded="true"]{background:#fff5d9;border:2px solid #c48a16}
+.ielts-level[aria-expanded="true"] .ielts-chevron{transform:rotate(90deg)}
+.ielts-level-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ielts-level-name{font-size:19px;font-weight:750}
+.ielts-band{font-size:13px;color:#98743a;margin-top:5px}
+.ielts-desc{font-size:12px;color:var(--muted);margin-top:10px}
+.ielts-chevron{font-size:22px;color:#b48635;transition:transform .18s}
+.ielts-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 3px}
+.ielts-module{background:#fff;border:1px solid #eadcc1;border-radius:12px;padding:15px}
+.ielts-module strong{display:block;font-size:14px;margin-bottom:6px}
+.ielts-module span{font-size:12px;color:var(--muted)}
+.ielts-coming{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:#9a6b15;background:#fff5d9;border-radius:999px;padding:4px 9px}
+@media(max-width:470px){.grade[data-grade="ielts"]{min-height:59px;padding:9px 5px;border-radius:9px}.grades{gap:6px}.grade .name,.grade[data-grade="ielts"] .name{font-size:14px}.grade .status,.grade[data-grade="ielts"] .status{font-size:9px}.ielts-step{grid-template-columns:30px minmax(0,1fr);column-gap:10px}.ielts-number{width:29px;height:29px}.ielts-level{padding:15px}.ielts-level-name{font-size:17px}.ielts-modules{grid-template-columns:1fr;gap:8px}}
+html[data-lab-theme="dark"] .grade[data-grade="ielts"]{background:#262831;color:#f4edf0;border-color:#514751}
+html[data-lab-theme="dark"] .grade[data-grade="ielts"][aria-pressed="true"]{background:#473821;color:#f5d996;border:2px solid #d4a849}
+html[data-lab-theme="dark"] .main[data-active-grade="ielts"]{--topic-accent:#f2d18a;--topic-border:#806636;--topic-tint:#392f21}
+html[data-lab-theme="dark"] .ielts-level,html[data-lab-theme="dark"] .ielts-module{background:#262831;border-color:#554b3b;color:#f4edf0}
+html[data-lab-theme="dark"] .ielts-level[aria-expanded="true"]{background:#453821;border-color:#d4a849}
+html[data-lab-theme="dark"] .ielts-number{background:#453821;border-color:#d4a849;color:#f2d18a}
+html[data-lab-theme="dark"] .ielts-line{background:#806636}
+html[data-lab-theme="dark"] .ielts-band,html[data-lab-theme="dark"] .ielts-chevron{color:#f2d18a}
+html[data-lab-theme="dark"] .ielts-coming{background:#453821;color:#f2d18a}
+/* IELTS accordion: compact teal activity cards, distinct from champagne level cards */
+.ielts-modules[hidden]{display:none!important}
+.ielts-modules{gap:9px;margin:9px 0 3px}
+.ielts-module{background:#f1faf8;border:1px solid #b9ded5;border-radius:10px;padding:10px 12px;min-height:82px}
+.ielts-module strong{color:#226e63;font-size:13px;margin-bottom:4px}
+.ielts-module span{color:#4e8278;font-size:11px;line-height:1.4}
+.ielts-coming{display:block;margin-top:7px;background:transparent;color:#247c70;padding:0;font-size:11px}
+html[data-lab-theme="dark"] .ielts-module{background:#193b36;border-color:#397c70;color:#d9f6ee}
+html[data-lab-theme="dark"] .ielts-module strong{color:#a9e5d6}
+html[data-lab-theme="dark"] .ielts-module span{color:#b7dcd2}
+html[data-lab-theme="dark"] .ielts-coming{background:transparent;color:#92dac8}
+@media(max-width:470px){.ielts-module{padding:10px 12px;min-height:0}}
 </style><script>
 (function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
-</script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="11"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">5 topics available</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
+</script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="11"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">5 topics available</span></button><button type="button" class="grade" data-grade="ielts" aria-pressed="false"><span class="name">IELTS</span><span class="status">4 levels</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
 const heading=document.getElementById('topics-title');
 const buttons=[...document.querySelectorAll('.grade')], content=document.getElementById('topics-content'), count=document.getElementById('topic-count');
 const topicsByGrade={
@@ -134,7 +184,57 @@ const publishedTopics={
  '11':['11.01.healthy-lifestyle.html'],
  '12':['12.01.life-stories.html','12.02.customs-and-culture.html','12.03.green-living.html','12.12.health.html','12.16.relationships.html']
 };
+const ieltsLevels=[
+ {name:'Pre-IELTS',band:'2.0 – 3.0',description:'Getting Started'},
+ {name:'Foundation A',band:'3.0 – 4.0',description:'Building Foundations'},
+ {name:'Foundation B',band:'4.0 – 5.0',description:'Developing Skills'},
+ {name:'Intensive',band:'5.0 – 6.0',description:'Reaching Higher'}
+];
+function showIELTS(){
+ document.querySelector('.main').dataset.activeGrade='ielts';
+ heading.textContent='IELTS Lab · Learning Path';
+ count.textContent='4 levels';
+ buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.grade==='ielts')));
+ const wrap=document.createElement('div');
+ const intro=document.createElement('p');intro.className='ielts-intro';intro.textContent='Your learning journey · Choose your learning level';wrap.appendChild(intro);
+ const path=document.createElement('div');path.className='ielts-path';
+ ieltsLevels.forEach((level,i)=>{
+  const step=document.createElement('div');step.className='ielts-step';
+  const rail=document.createElement('div');rail.className='ielts-rail';
+  const num=document.createElement('span');num.className='ielts-number';num.textContent=String(i+1);
+  const line=document.createElement('span');line.className='ielts-line';rail.append(num,line);
+  const body=document.createElement('div');body.className='ielts-step-body';
+  const btn=document.createElement('button');btn.type='button';btn.className='ielts-level';btn.setAttribute('aria-expanded','false');
+  const top=document.createElement('div');top.className='ielts-level-row';
+  const left=document.createElement('div');
+  const name=document.createElement('div');name.className='ielts-level-name';name.textContent=level.name;
+  const band=document.createElement('div');band.className='ielts-band';band.textContent='Band '+level.band;
+  left.append(name,band);
+  const arrow=document.createElement('span');arrow.className='ielts-chevron';arrow.textContent='›';arrow.setAttribute('aria-hidden','true');
+  top.append(left,arrow);
+  const desc=document.createElement('div');desc.className='ielts-desc';desc.textContent=level.description;
+  btn.append(top,desc);
+  const modules=document.createElement('div');modules.className='ielts-modules';modules.hidden=true;
+  [['Vocabulary Review','Review and practise vocabulary'],['Daily Challenge','Listening, shadowing & pronunciation']].forEach(([label,detail])=>{
+   const card=document.createElement('div');card.className='ielts-module';
+   const title=document.createElement('strong');title.textContent=label;
+   const sub=document.createElement('span');sub.textContent=detail;
+   const soon=document.createElement('div');soon.className='ielts-coming';soon.textContent='Coming soon';
+   card.append(title,sub,soon);modules.appendChild(card);
+  });
+  btn.addEventListener('click',()=>{
+   const expand=btn.getAttribute('aria-expanded')!=='true';
+   path.querySelectorAll('.ielts-level').forEach(other=>other.setAttribute('aria-expanded','false'));
+   path.querySelectorAll('.ielts-modules').forEach(other=>other.hidden=true);
+   if(expand){btn.setAttribute('aria-expanded','true');modules.hidden=false;}
+  });
+  body.append(btn,modules);step.append(rail,body);path.appendChild(step);
+ });
+ wrap.appendChild(path);content.replaceChildren(wrap);
+}
 function showGrade(grade){
+ if(grade==='ielts'){showIELTS();return;}
+
  document.querySelector('.main').dataset.activeGrade=grade;
  heading.textContent='Grade '+grade+' · Topics';
  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.grade===grade)));
