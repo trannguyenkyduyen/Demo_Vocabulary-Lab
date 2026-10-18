@@ -112,6 +112,20 @@ html[data-lab-theme="dark"] .ielts-module strong{color:#a9e5d6}
 html[data-lab-theme="dark"] .ielts-module span{color:#b7dcd2}
 html[data-lab-theme="dark"] .ielts-coming{background:transparent;color:#92dac8}
 @media(max-width:470px){.ielts-module{padding:10px 12px;min-height:0}}
+
+/* IELTS Lab: keep level separate from two activity cards; compact pack buttons */
+.ielts-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 8px}
+.ielts-module{min-width:0;min-height:108px;padding:14px 15px;border-radius:12px}
+.ielts-module strong{font-size:14px}
+.ielts-module span{font-size:12px}
+.ielts-packs{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ielts-pack{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:8px;font-size:11px!important;font-weight:750;text-decoration:none;line-height:1.2;white-space:nowrap;border:1px solid #c6dcd4;background:#fff;color:#2b7569!important}
+.ielts-pack.ready{background:#d9f4e7;border-color:#69bc91;color:#17673d!important;cursor:pointer}
+.ielts-pack.ready:hover{background:#c0edd6;transform:translateY(-1px)}
+.ielts-pack.pending{opacity:.62;cursor:default}
+html[data-lab-theme="dark"] .ielts-pack{background:#24443e;border-color:#4a7d70;color:#c2e7dc!important}
+html[data-lab-theme="dark"] .ielts-pack.ready{background:#245b40;border-color:#5eb68b;color:#e3fff0!important}
+@media(max-width:560px){.ielts-modules{grid-template-columns:1fr;gap:9px}.ielts-module{min-height:0}.ielts-packs{gap:6px}}
 </style><script>
 (function(){try{document.documentElement.dataset.labTheme=localStorage.getItem('my-vocabulary-lab-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.labTheme='light'}})();
 </script></head><body><header class="hero"><div class="wrap"><h1>MY VOCABULARY LAB</h1><p class="copyright">© 2026 Trần Nguyễn Kỳ Duyên. All rights reserved.</p></div></header><main class="wrap main" data-active-grade="11"><section aria-labelledby="choose-grade"><div class="grades" role="group" aria-label="Choose your grade"><button type="button" class="grade" data-grade="10" aria-pressed="false"><span class="name">Grade 10</span><span class="status">11 topics</span></button><button type="button" class="grade" data-grade="11" aria-pressed="false"><span class="name">Grade 11</span><span class="status">15 topics</span></button><button type="button" class="grade" data-grade="12" aria-pressed="true"><span class="name">Grade 12</span><span class="status">5 topics available</span></button><button type="button" class="grade" data-grade="ielts" aria-pressed="false"><span class="name">IELTS</span><span class="status">4 levels</span></button></div></section><section aria-labelledby="topics-title"><div class="topics-head"><h2 id="topics-title">Grade 12 · Topics</h2><span class="count" id="topic-count">21 topics</span></div><div id="topics-content" aria-live="polite"></div></section></main><footer class="footer">MY VOCABULARY LAB · © 2026 Trần Nguyễn Kỳ Duyên</footer><script>
@@ -215,13 +229,26 @@ function showIELTS(){
   const desc=document.createElement('div');desc.className='ielts-desc';desc.textContent=level.description;
   btn.append(top,desc);
   const modules=document.createElement('div');modules.className='ielts-modules';modules.hidden=true;
-  [['Vocabulary Review','Review and practise vocabulary'],['Daily Challenge','Listening, shadowing & pronunciation']].forEach(([label,detail])=>{
-   const card=document.createElement('div');card.className='ielts-module';
-   const title=document.createElement('strong');title.textContent=label;
-   const sub=document.createElement('span');sub.textContent=detail;
-   const soon=document.createElement('div');soon.className='ielts-coming';soon.textContent='Coming soon';
-   card.append(title,sub,soon);modules.appendChild(card);
-  });
+  const vocab=document.createElement('div');vocab.className='ielts-module';
+  const vocabTitle=document.createElement('strong');vocabTitle.textContent='Vocabulary Review';
+  const vocabDesc=document.createElement('span');vocabDesc.textContent='Review and practise vocabulary';
+  const packs=document.createElement('div');packs.className='ielts-packs';
+  for(let n=1;n<=4;n++){
+   const packName='Pack '+String(n).padStart(2,'0');
+   const isReady=level.name==='Foundation B'&&n===1;
+   const pack=document.createElement(isReady?'a':'span');pack.className='ielts-pack'+(isReady?' ready':' pending');
+   pack.textContent=packName;
+   if(isReady){pack.href='foundation-b-pack-01.html';pack.title='Open Foundation B · Pack 01';}
+   else {pack.title='Coming soon';pack.setAttribute('aria-label',packName+' · Coming soon');}
+   packs.appendChild(pack);
+  }
+  vocab.append(vocabTitle,vocabDesc,packs);
+  const pronunciation=document.createElement('div');pronunciation.className='ielts-module';
+  const pronTitle=document.createElement('strong');pronTitle.textContent='Pronunciation';
+  const pronDesc=document.createElement('span');pronDesc.textContent='Listening, shadowing & pronunciation';
+  const pronSoon=document.createElement('div');pronSoon.className='ielts-coming';pronSoon.textContent='Coming soon';
+  pronunciation.append(pronTitle,pronDesc,pronSoon);
+  modules.append(vocab,pronunciation);
   btn.addEventListener('click',()=>{
    const expand=btn.getAttribute('aria-expanded')!=='true';
    path.querySelectorAll('.ielts-level').forEach(other=>other.setAttribute('aria-expanded','false'));
